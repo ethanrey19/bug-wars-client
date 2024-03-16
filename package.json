@@ -21,6 +21,7 @@
     "axios-mock-adapter": "^1.22.0",
     "pinia": "^2.1.7",
     "vue": "^3.3.10",
+    "vue-lands-tile-map": "^1.0.2",
     "vue-router": "^4.2.5",
     "vue-toastification": "^2.0.0-rc.5"
   },

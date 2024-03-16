@@ -5,7 +5,9 @@
     <PlayerScriptSelector/>
     <div class="button-section">
 
-      <button class="primary-button">Play</button>
+      <button class="primary-button"
+      @click="router.push('/play')"
+      >Play</button>
     </div>
   </div>
 </template>
@@ -13,6 +15,9 @@
 <script setup lang="ts">
 import MapCarousel from '@/components/MapCarousel.vue';
 import PlayerScriptSelector from '@/components/PlayerScriptSelector.vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 </script>
 
 <style lang="scss" scoped>

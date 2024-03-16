@@ -10,14 +10,6 @@ export type ScriptRequest = {
   body: String
 }
 
-export type GameMap = {
-  id: Number;
-  name: String;
-  height: Number;
-  width: Number;
-  body: String;
-  imageUrl: String;
-}
 export type Script = {
   scriptId: number;
   name: string;

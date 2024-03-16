@@ -1,15 +1,14 @@
-import axios from "axios";
+import type { GameMap } from "@/models/game-map.interface";
+import axios, { type AxiosResponse } from "axios";
 
 export default{
 
-    async getAllMaps(){
-        return axios.get('/api/maps')
-        .catch(error => {
-            console.error(error);
-            return Promise.reject(error);
-        })},
+     getAllMaps():Promise<AxiosResponse<GameMap[], any>>{
+        return axios.get<GameMap[]>('/api/maps');
+    },
 
+    getMapById(gameMapId: number):Promise<AxiosResponse<GameMap, any>>{
+        return axios.get<GameMap>(`api/maps/${gameMapId}`);
+    }
 
 }
-
-

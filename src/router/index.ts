@@ -6,6 +6,7 @@ import RegisterView from '../views/RegisterView.vue';
 import AllScriptsViewVue from '@/views/AllScriptsView.vue';
 import { useAuthStore } from '@/stores/AuthStore';
 import ScriptDetailView from '@/views/ScriptDetailView.vue';
+import PlayView from '@/views/PlayView.vue';
 import UnderConstruction from "@/views/UnderConstruction.vue";
 
 const router = createRouter({
@@ -40,6 +41,14 @@ const router = createRouter({
       path: '/lobby',
       name: 'lobby',
       component:LobbyView,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: '/play',
+      name: 'play',
+      component:PlayView,
       meta: {
         requiresAuth: false
       }
