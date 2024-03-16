@@ -1,0 +1,186 @@
+/* global colors */
+$Primary: #71F79F;
+$White: #FFFFFF;
+$Gray: #8B8B8B;
+$Dark-Gray: #181818;
+$Black: #000000;
+$Danger: #CE5050;
+
+/* global horizontal padding */
+$MobileEdgeInset: 1rem;
+$MobileTopMargin: 5rem;
+
+/* global fonts */ 
+@import 'https://fonts.googleapis.com/css?family=Press+Start+2P';
+.Large-Headline-Text {
+    font-family: 'Press Start 2P';
+    color: $White;
+    font-size : 24px;
+}
+.Headline-Text {
+    font-family: 'Press Start 2P';
+    color: $White;
+    font-size : 16px;
+}
+.Body-Text{
+    font-family: 'Press Start 2P';
+    color: $White;
+    font-size : 12px;
+}
+.Small-Body-Text{
+    font-family: 'Press Start 2P';
+    color: $White;
+    font-size : 8px;
+}
+
+.error-message {
+  font-family: 'Press Start 2P';
+  color: $Danger;
+  font-size: 12px;
+}
+
+/* add global css classes below */
+.global-test-class {
+    color: red;
+}
+/* primary button */
+.primary-button {
+    height: 64px;
+    width: 100%;
+    color: $Primary;
+    border: 1px solid $Primary;
+    background-color: $Black;
+    font-family: 'Press Start 2P';
+    font-size : 12px;
+    cursor: pointer;
+  }
+  .primary-button:hover {
+    background-color: $Primary;
+    color: $Black;
+  }
+  .primary-button:active {
+    color: $Primary;
+    background-color: $Black;
+  }
+
+  /*login-logout-button */
+  .login-logout-button {
+    height: 28px;
+    width: fit-content;
+    padding: 1% 2%;
+    text-align: center;
+    color: $White;
+    border: 1px solid $White;
+    background-color: $Black;
+    font-family: 'Press Start 2P';
+    font-size : 12px;
+   
+  }
+  .login-logout-button:hover {
+    background-color: $White;
+    color: $Black;
+  }
+  .login-logout-button:active {
+    color: $White;
+    background-color: $Black;
+  }
+
+  .edit-players-button{
+    height: 64px;
+    width: 100%;
+    color: $White;
+    border: 1px solid $Black;
+    background-color: $Black;
+    font-family: 'Press Start 2P';
+    font-size : 12px;
+  }
+
+  .close-container {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 20px;
+    padding-right: 20px;
+    height: 24px;
+    list-style-type: none;
+  }
+  .close-button {
+    height: 24px;
+    width: 24px;
+    background-color: $Black;
+    color: black;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .edit-players-button:hover {
+    background-color: $Black;
+    color: $White;
+  }
+  .edit-players-button:active {
+    color: $White;
+    background-color: $Black;
+  }
+  
+  /* input */
+  .input-container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  
+  .input-label {
+    display:block;
+    color: $White;
+    font-family: 'Press Start 2P';
+    font-size : 12px;
+    margin-bottom: 8px;
+  }
+  .input {
+    font-family: 'Press Start 2P';
+    font-size : 12px;
+    display:block;
+    color: $White;
+    height: 48px;
+    margin: 0px 0px 32px 0px;
+    border: 0px;
+    width: 100% -16px;
+    background-color: $Dark-Gray;
+    border: 1px solid $Gray;
+    padding: 8px;
+    
+  }
+  .input:focus {
+    outline: none !important;
+    display:block;
+    border: 1px solid $Primary;
+
+  }
+  input:focus + label {
+    color: $Primary;
+  }
+  a {
+    text-decoration: none;
+  }
+  
+/* primary danger */
+.danger-button {
+  height: 64px;
+  width: 100%;
+  color: $Danger;
+  border: 1px solid $Danger;
+  background-color: $Black;
+  font-family: 'Press Start 2P';
+  font-size : 12px;
+  cursor: pointer;
+}
+.danger-button:hover {
+  background-color: $Danger;
+  color: $Black;
+}
+.danger-button:active {
+  color: $Danger;
+  background-color: $Black;
+}
