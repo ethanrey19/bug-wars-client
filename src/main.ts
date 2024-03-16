@@ -8,11 +8,15 @@ import router from './router';
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 
+
+import VueLandsTileMap from 'vue-lands-tile-map'
+
 const app = createApp(App);
 
 app.use(createPinia());
 app.use(Toast);
 app.use(router);
+app.use(VueLandsTileMap)
 // TODO: Setup axios on backend ~Daniel
 //baseURL for deployment. Uncomment before committing.
 axios.defaults.baseURL = import.meta.env.VITE_REMOTE_API || "https://bug-wars-server-fhs0.onrender.com"
