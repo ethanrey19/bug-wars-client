@@ -52,10 +52,10 @@ function setMapDetails() {
   const map = maps.value[currentIndex.value];
 
   const mapImage = document.querySelector('.map-image');
-  if (typeof map.imageUrl === 'string') {
+  if (typeof map.imagePath === 'string') {
     if (mapImage instanceof HTMLImageElement) {
       console.log('here');
-      mapImage.src = map.imageUrl;
+      mapImage.src = map.imagePath;
     }
   }
   const currentMapName = document.getElementById('currentMapName');
