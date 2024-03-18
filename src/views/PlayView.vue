@@ -1,11 +1,11 @@
 <template>
-  <div class="board">
+  <div class="board" style="display: flex; justify-content: center; align-items: center;">
     <canvas
       ref="canvasRef"
       :width="width"
       :height="height"
       tabindex="0"
-      style="border: 3px solid white"
+      style="border: 3px solid white;"
     ></canvas>
   </div>
 </template>
