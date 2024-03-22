@@ -2,12 +2,9 @@
   <div class="lobby-page">
     <h2 class="Large-Headline-Text">LOBBY</h2>
     <MapCarousel />
-    <PlayerScriptSelector/>
+    <PlayerScriptSelector @update-selections="handleUpdateSelections" />
     <div class="button-section">
-
-      <button class="primary-button"
-      @click="router.push('/play')"
-      >Play</button>
+      <button class="primary-button" @click.prevent="play">Play</button>
     </div>
   </div>
 </template>
@@ -15,9 +12,31 @@
 <script setup lang="ts">
 import MapCarousel from '@/components/MapCarousel.vue';
 import PlayerScriptSelector from '@/components/PlayerScriptSelector.vue';
-import { useRouter } from 'vue-router';
+import { PlayerSelection } from '@/models/player-selection.interface';
+import scriptService from '@/services/scriptService';
+import { ref } from 'vue';
 
-const router = useRouter();
+const selectedOptions = ref<PlayerSelection[]>([]);
+
+const handleUpdateSelections = (newSelections: PlayerSelection[]) => {
+  selectedOptions.value = newSelections;
+};
+
+const play = () => {
+  const selections = selectedOptions.value;
+  let scripts = getScripts(selections);
+
+  console.log(scripts);
+};
+
+function getScripts(selections: any[]) {
+  let scripts: any[] = [];
+  for (let i = 0; i < selections.length; i++) {
+    scriptService.getScriptByName(selections.at(i).selection).then((data: { data: any }) => {
+      scripts[i] = data.data;
+    });
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -34,5 +53,4 @@ const router = useRouter();
 .primary-button {
   margin-top: 40px;
 }
-
 </style>
