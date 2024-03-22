@@ -5,24 +5,17 @@ export default {
     return axios.post('/api/scripts', script);
   },
 
-  async getAllScripts() {
-    return axios.get('/api/scripts').catch((error) => {
-      console.error(error);
-      return Promise.reject(error);
-    });
-  },
+    async getAllScripts(){
+        return axios.get('/api/scripts')
+        .catch(error => {
+            return Promise.reject(error);
+        })},
 
-  async updateScript(script: any, scriptId: string) {
-    console.log(scriptId);
-    return axios.put(`/api/scripts/${scriptId}`, script);
-  },
+    async updateScript(script: any, scriptId: string){
+        return axios.put(`/api/scripts/${scriptId}`, script);},
+    
+    async deleteScriptById(scriptId: number) {
+        return axios.delete(`/api/scripts/${scriptId}`);
+    }
 
-  async deleteScriptById(scriptId: number) {
-    console.log(`Deleting script with ID: ${scriptId}`);
-    return axios.delete(`/api/scripts/${scriptId}`);
-  },
-
-  async getScriptByName(scriptName: string) {
-    return axios.get(`/api/scripts/name/${scriptName}`);
-  },
-};
+}

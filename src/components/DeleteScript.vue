@@ -20,17 +20,15 @@ let showDelete = ref(false);
 const toast = useToast();
 
 const script = computed(() => {
-  return scriptStore.script;
+  return scriptStore.currentScript;
 });
 
 const router = useRouter();
 const toggleDelete = () => {
-  console.log('handle delete');
   showDelete.value = true;
 };
 
 const cancelDelete = () => {
-  console.log('hello');
   showDelete.value = false;
 };
 

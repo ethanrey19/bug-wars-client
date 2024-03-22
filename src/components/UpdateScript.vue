@@ -19,13 +19,14 @@ import { useScriptStore } from '@/stores/ScriptStore';
 import scriptService from '@/services/scriptService';
 import { useToast } from 'vue-toastification';
 import ScriptConsole from '@/components/ScriptConsole.vue';
+
 const scriptStore = useScriptStore();
 const emits = defineEmits(['toggleButtons']);
 const toast = useToast();
 
 const script = reactive({
-  name: scriptStore.script.name,
-  body: scriptStore.script.body,
+  name: scriptStore.currentScript.name,
+  body: scriptStore.currentScript.body,
 });
 
 let showEdit = ref(false);
@@ -35,22 +36,21 @@ const toggleEditor = () => {
     showEdit.value = true;
   } else if (showEdit.value == true) {
     showEdit.value = false;
-    script.name = scriptStore.script.name;
-    script.body = scriptStore.script.body;
+    script.name = scriptStore.currentScript.name;
+    script.body = scriptStore.currentScript.body;
   }
 
   emits('toggleButtons');
 };
 
 const saveEditorScript = () => {
-  const scriptId = scriptStore.script.scriptId.toString();
+  const scriptId = scriptStore.currentScript.scriptId.toString();
   scriptService
     .updateScript(script, scriptId)
     .then((response) => {
       if (response.status == 202) {
         scriptStore.addNewScript(response.data);
-        console.log('DATA: ' + response.data);
-        scriptStore.setScript(response.data);
+        scriptStore.setCurrentScript(response.data);
         toast.success('Successful Update');
         toggleEditor();
       }

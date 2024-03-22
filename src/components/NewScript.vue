@@ -29,8 +29,8 @@ const toggleNewEditor = () => {
     showEditor.value = true;
   } else if (showEditor.value == true) {
     showEditor.value = false;
-    newScript.name = '';
-    newScript.body = '';
+    newScript.name = 'toggle name';
+    newScript.body = 'toggle body';
   }
 };
 
@@ -38,7 +38,6 @@ const saveEditorScript = () => {
   scriptService
     .createNewScript(newScript)
     .then((response) => {
-      console.log(response);
       if (response.status == 201) {
         scriptStore.addNewScript(response.data);
         toast.success('Successful Save');
