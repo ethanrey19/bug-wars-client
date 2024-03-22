@@ -48,9 +48,9 @@ describe('DeleteScript.vue', () => {
       it('deletes script with correct ID from backend & ScriptStore on success', async () => {
 
         //arrange
-        const scriptStore = useScriptStore()
+        const scriptStore = useScriptStore();
         scriptStore.setScripts(mockScripts);
-        scriptStore.setScript(mockScripts[1]);
+        scriptStore.setCurrentScript(mockScripts[1]);
         wrapper = mount(DeleteScript)
         const toggleButton = wrapper.find('#toggle-button');
         

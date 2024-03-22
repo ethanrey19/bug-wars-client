@@ -10,7 +10,6 @@ const router = useRouter();
 
 const logout = () => {
   authStore.logout();
-  console.log('Logged out');
   router.push('/');
 };
 </script>

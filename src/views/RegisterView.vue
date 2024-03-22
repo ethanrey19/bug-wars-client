@@ -100,8 +100,6 @@ const register = () => {
       }
     })
     .catch((error) => {
-      const response = error.response;
-      console.log(response);
       toast.error('Error creating account');
     });
 };

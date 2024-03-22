@@ -5,7 +5,6 @@ import { type AxiosResponse } from 'axios';
 import { useAuthStore } from '@/stores/AuthStore';
 import RegisterView from '@/views/RegisterView.vue';
 import authService from '@/services/authService';
-import { useRouter } from 'vue-router';
 
 let wrapper;
 
@@ -75,7 +74,6 @@ describe('RegisterView.vue', () => {
             global: { plugins: [pinia] },
         });
 
-        const mockNewUser = {username: 'newguy', email:'newguy@gmail.com', password: 'newguy1'};
         const mockLoginCredentials ={username: 'newguy', password: 'newguy1'};
         const authStore = useAuthStore();
 
@@ -108,7 +106,7 @@ describe('RegisterView.vue', () => {
         await passwordConfirmInput.setValue('newguy1');
 
         const registerButton = wrapper.find('button');
-        const spy = vi.spyOn(registerButton, 'trigger');
+        vi.spyOn(registerButton, 'trigger');
         await registerButton.trigger('submit.prevent');
         await wrapper.vm.$nextTick();
 
@@ -122,8 +120,6 @@ describe('RegisterView.vue', () => {
             global: { plugins: [pinia] },
         });
 
-        const mockNewUser = {username: 'newguy2', email:'newguy@gmail2.com', password: 'newguy2'};
-    
         const usernameInput = wrapper.find('input[type="text"]');
         const emailInput = wrapper.find('input[type="email"]');
         const passwordInput = wrapper.find('#password');

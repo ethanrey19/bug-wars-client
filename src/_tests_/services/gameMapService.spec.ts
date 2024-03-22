@@ -1,8 +1,6 @@
 import { vi, describe, expect, it, beforeEach, afterEach } from 'vitest';
 import GameMapService from '../../services/gameMapService';
-import axios from 'axios';
 import type { GameMap } from '@/models/game-map.interface';
-import gameMapService from '../../services/gameMapService';
 
 describe('gameMapService', () => {
 

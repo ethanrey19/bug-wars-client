@@ -1,6 +1,5 @@
-import axios from 'axios';
 import authService from '../../services/authService';
-import { vi, test, describe, expect, it, beforeEach, afterEach } from 'vitest';
+import { vi, describe, expect, it, beforeEach, afterEach } from 'vitest';
 
 
 describe('AuthService', () => {
