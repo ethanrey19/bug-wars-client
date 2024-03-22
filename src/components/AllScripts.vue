@@ -22,7 +22,7 @@ const scripts = computed(() => {
 });
 const navigateToPage = (script: any) => {
   router.push({ name: 'script-detail', params: { id: script.scriptId } });
-  scriptStore.setScript(script);
+  scriptStore.setCurrentScript(script);
 };
 </script>
 

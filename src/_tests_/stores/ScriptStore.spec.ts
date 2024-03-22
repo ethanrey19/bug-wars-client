@@ -31,9 +31,9 @@ test('setScripts should set all scripts', ({ expect }) => {
 
 test('setScript should set a single script in store and sessionStorage', ({ expect }) => {
   const store = useScriptStore();
-  store.setScript(mockScripts[1]);
+  store.setCurrentScript(mockScripts[1]);
 
-  expect(store.script).toEqual(mockScripts[1]);
+  expect(store.currentScript).toEqual(mockScripts[1]);
   expect(sessionStorage.getItem('script')).toBe(JSON.stringify(mockScripts[1]))
 });
 

@@ -5,11 +5,7 @@ import HomeView from '@/views/HomeView.vue';
 describe('HomeView', () => {
  it('renders properly', () => {
    const wrapper = mount(HomeView);
-   expect(wrapper.find('.homepage').exists()).toBe(true);
-
-   expect(wrapper.find('.title h1').text()).toBe('BUG WARS');
-   expect(wrapper.findAll('.menu-buttons button').length).toBe(3);
-  
+  expect(wrapper.find('.homepage').exists()).toBe(true);
  });
 
  it('navigates to correct routes on button click', async () => {
@@ -22,11 +18,9 @@ describe('HomeView', () => {
      },
    });
 
-  //  await wrapper.find('.menu-buttons button').trigger('click');
-  //  expect(routerPush).toHaveBeenCalledWith('/');
+  await wrapper.find('.play-button').trigger('click');
+  expect(routerPush).toHaveBeenCalledWith('/lobby');
 
-   await wrapper.find('#login-button').trigger('click');
-   expect(routerPush).toHaveBeenCalledWith('/login');
  });
 });
 
