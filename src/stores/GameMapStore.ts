@@ -28,5 +28,8 @@ export const useGameMapStore = defineStore('gameMap', {
       this.currentMap = map;
       sessionStorage.setItem('gameMap', JSON.stringify(this.currentMap));
     },
+    getCurrentMap() {
+      return this.currentMap;
+    }
   },
 });
