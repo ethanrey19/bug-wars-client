@@ -1,36 +1,45 @@
 <template>
-  <div class="board" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-    <!-- <h1 id="map-name" class="Large-Headline-Text">GameMap</h1> -->
-    <div id="currentMapName"></div>
+  <div
+    class="board"
+    style="display: flex; flex-direction: column; justify-content: center; align-items: center"
+  >
+    <h1 id="map-name" class="Large-Headline-Text">{{ mapName }}</h1>
     <canvas
       ref="canvasRef"
       :width="width"
       :height="height"
       tabindex="0"
-      style="border: 3px solid white;"
+      style="border: 3px solid white"
     ></canvas>
-    <PlayerScriptSelector/>
+    <PlayerScriptSelector />
     <button v-show="false">Play Again</button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import PlayerScriptSelector from '@/components/PlayerScriptSelector.vue';
 import { useGameMapStore } from '@/stores/GameMapStore';
 
 const mapStore = useGameMapStore();
+const currentMapIndex = localStorage.getItem('currentMapIndex');
 
-const map = mapStore.getCurrentMap();
-console.log("map", map);
+let mapName = 'ss';
 
+const currentMap = computed(() => {
+  if (currentMapIndex) {
+    return mapStore.maps[parseInt(currentMapIndex, 10)];
+  }
+  return null;
+});
 
-const currentMapName = document.getElementById('currentMapName');
-  if (currentMapName !== null) {
-    currentMapName.textContent = String(map.name);
+function updateCurrentMapName() {
+  if (currentMap.value) {
+    mapName = currentMap.value.name;
   } else {
     console.error("Element with id 'currentMapName' not found!");
   }
+}
 
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 let tileSize = 16;
@@ -39,51 +48,53 @@ let mapHeight = 11;
 const width: number = tileSize * mapWidth;
 const height: number = tileSize * mapHeight;
 
-let body = "" +
-    "XXXXXXXXXXX\n" +
-    "X000000000X\n" +
-    "X000000000X\n" +
-    "X000000000X\n" +
-    "X000000000X\n" +
-    "X000000000X\n" +
-    "X000000000X\n" +
-    "X000000000X\n" +
-    "X000000000X\n" +
-    "X000000000X\n" +
-    "XXXXXXXXXXX";
+let body =
+  '' +
+  'XXXXXXXXXXX\n' +
+  'X000000000X\n' +
+  'X000000000X\n' +
+  'X000000000X\n' +
+  'X000000000X\n' +
+  'X000000000X\n' +
+  'X000000000X\n' +
+  'X000000000X\n' +
+  'X000000000X\n' +
+  'X000000000X\n' +
+  'XXXXXXXXXXX';
 
-    onMounted(() => {
-      let element = canvasRef.value;
-      if (element) {
-        console.log('loading picture');
-        const wallImage = new Image();
-        const floorImage = new Image();
-        wallImage.src = 'src/assets/terrain/wall.png';
-        floorImage.src = 'src/assets/terrain/floor.png';
-        const context = element.getContext('2d');
-        wallImage.onload = function() {
-            floorImage.onload = function() {
-                let x = 0;
-                let y = 0;
-                for(let i = 0; i < body.length;i++){
-                    let char = body.charAt(i);
-                    if(char == 'X'){
-                        context?.drawImage(wallImage, x, y, tileSize, tileSize);
-                        x += tileSize;
-                    }else if (char == '0'){
-                        context?.drawImage(floorImage, x, y, tileSize, tileSize);
-                        x += tileSize;
-                    }else {
-                        y+= tileSize;
-                        x=0;
-                    }
-                }
-            }
+onMounted(() => {
+  let element = canvasRef.value;
+  if (element) {
+    console.log('loading picture');
+    const wallImage = new Image();
+    const floorImage = new Image();
+    wallImage.src = 'src/assets/terrain/wall.png';
+    floorImage.src = 'src/assets/terrain/floor.png';
+    const context = element.getContext('2d');
+    wallImage.onload = function () {
+      floorImage.onload = function () {
+        let x = 0;
+        let y = 0;
+        for (let i = 0; i < body.length; i++) {
+          let char = body.charAt(i);
+          if (char == 'X') {
+            context?.drawImage(wallImage, x, y, tileSize, tileSize);
+            x += tileSize;
+          } else if (char == '0') {
+            context?.drawImage(floorImage, x, y, tileSize, tileSize);
+            x += tileSize;
+          } else {
+            y += tileSize;
+            x = 0;
+          }
         }
-      }
-      console.log(body);
-    });
+      };
+    };
+  }
+  console.log(body);
+});
 
+updateCurrentMapName();
 </script>
 
 <style lang="scss" scoped>
