@@ -41,7 +41,7 @@ const router = createRouter({
       name: 'lobby',
       component:LobbyView,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -49,7 +49,7 @@ const router = createRouter({
       name: 'play',
       component:PlayView,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {

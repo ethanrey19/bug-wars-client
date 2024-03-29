@@ -33,10 +33,9 @@ const currentMapName = document.getElementById('currentMapName');
   }
 
 const canvasRef = ref<HTMLCanvasElement | null>(null);
-const scale = 1;
-let tileSize = 16 * scale;
-let mapWidth = 11 * scale;
-let mapHeight = 11 * scale;
+let tileSize = 16;
+let mapWidth = 11;
+let mapHeight = 11;
 const width: number = tileSize * mapWidth;
 const height: number = tileSize * mapHeight;
 
@@ -69,10 +68,10 @@ let body = "" +
                 for(let i = 0; i < body.length;i++){
                     let char = body.charAt(i);
                     if(char == 'X'){
-                        context?.drawImage(wallImage, x, y, tileSize * scale, tileSize * scale);
+                        context?.drawImage(wallImage, x, y, tileSize, tileSize);
                         x += tileSize;
                     }else if (char == '0'){
-                        context?.drawImage(floorImage, x, y,tileSize * scale,tileSize * scale);
+                        context?.drawImage(floorImage, x, y, tileSize, tileSize);
                         x += tileSize;
                     }else {
                         y+= tileSize;

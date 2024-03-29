@@ -11,12 +11,12 @@ export type ScriptRequest = {
 };
 
 export type Script = {
-  scriptId: number;
+  scriptId: string;
   name: string;
   body: string;
 };
 
 export type GameRequest = {
-  mapId: number;
-  scriptIds: number[];
+  mapId: string;
+  scriptIds: string[];
 };
