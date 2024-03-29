@@ -15,3 +15,8 @@ export type Script = {
   name: string;
   body: string;
 };
+
+export type GameRequest = {
+  mapId: number;
+  scriptIds: number[];
+};

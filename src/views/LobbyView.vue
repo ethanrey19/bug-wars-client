@@ -22,21 +22,20 @@ const handleUpdateSelections = (newSelections: PlayerSelection[]) => {
   selectedOptions.value = newSelections;
 };
 
-const play = () => {
-  const selections = selectedOptions.value;
-  let scripts = getScripts(selections);
+const play = async () => {
+ const selections = selectedOptions.value;
 
-  console.log(scripts);
+ const scripts = selections.map(selection => 
+    scriptService.getScriptByName(selection.selection)
+ );
+ const resolvedScripts = await Promise.all(scripts);
+ const scriptIds = resolvedScripts.map(resolvedScripts => resolvedScripts.data.scriptId);
+
+ 
+
+ console.log(resolvedScripts);
+ console.log(scriptIds);
 };
-
-function getScripts(selections: any[]) {
-  let scripts: any[] = [];
-  for (let i = 0; i < selections.length; i++) {
-    scriptService.getScriptByName(selections.at(i).selection).then((data: { data: any }) => {
-      scripts[i] = data.data;
-    });
-  }
-}
 </script>
 
 <style lang="scss" scoped>
