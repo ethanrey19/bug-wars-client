@@ -42,9 +42,9 @@ function updateCurrentMapName() {
 }
 
 const canvasRef = ref<HTMLCanvasElement | null>(null);
-let tileSize = 16;
-let mapWidth = 11;
-let mapHeight = 11;
+const tileSize = 16;
+const mapWidth = 11;
+const mapHeight = 11;
 const width: number = tileSize * mapWidth;
 const height: number = tileSize * mapHeight;
 
@@ -85,22 +85,22 @@ let body = "" +
                 for(let i = 0; i < body.length;i++){
                     let char = body.charAt(i);
                     if(char == 'X'){
-                      context?.drawImage(wallImage, x, y, tileSize * scale, tileSize * scale);
+                      context?.drawImage(wallImage, x, y, tileSize, tileSize);
                       x += tileSize;
                     }else if (char == '0'){
-                      context?.drawImage(floorImage, x, y,tileSize * scale,tileSize * scale);
+                      context?.drawImage(floorImage, x, y,tileSize,tileSize);
                       x += tileSize;
                     }else if (char == '1'){
-                      context?.drawImage(RedBugImage, x, y, tileSize * scale, tileSize * scale);
+                      context?.drawImage(RedBugImage, x, y, tileSize, tileSize);
                       x += tileSize;
                     }else if (char == '2'){
-                      context?.drawImage(BlueBugImage, x, y, tileSize * scale, tileSize * scale);
+                      context?.drawImage(BlueBugImage, x, y, tileSize, tileSize);
                       x += tileSize;
                     }else if (char == '3'){
-                      context?.drawImage(GreenBugImage, x, y, tileSize * scale, tileSize * scale);
+                      context?.drawImage(GreenBugImage, x, y, tileSize, tileSize);
                       x += tileSize;
                     }else if (char == '4'){
-                      context?.drawImage(YellowBugImage, x, y, tileSize * scale, tileSize * scale);
+                      context?.drawImage(YellowBugImage, x, y, tileSize, tileSize);
                       x += tileSize;
                     }else {
                         y+= tileSize;
