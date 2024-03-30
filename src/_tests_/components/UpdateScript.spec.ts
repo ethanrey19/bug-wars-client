@@ -44,7 +44,7 @@ describe('UpdateScript.vue', () => {
     mockResponse = {
       status: 202,
       data: {
-        script_id: 2,
+        scriptId: 1,
         name: 'Test2Script2',
         body: 'Goodbye world!',
       },
@@ -73,7 +73,7 @@ describe('UpdateScript.vue', () => {
 
     expect(scriptService.updateScript).toHaveBeenLastCalledWith(
       mockScriptRequest,
-      mockScript.scriptId.toString(),
+      mockScript.scriptId,
     );
   });
 });

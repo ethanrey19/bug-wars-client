@@ -55,7 +55,7 @@ describe('DeleteScript.vue', () => {
         const toggleButton = wrapper.find('#toggle-button');
         
 
-        const mockScriptID = 1;
+        const mockScriptID = 2;
        
         const mockResponse: AxiosResponse<any, any> = {
           status: 200, 
@@ -75,7 +75,7 @@ describe('DeleteScript.vue', () => {
         expect(scriptService.deleteScriptById).toHaveBeenCalledOnce();
         expect(scriptService.deleteScriptById).toHaveBeenCalledWith(mockScriptID);
         expect(scriptStore.scripts.length).toEqual(2);
-        expect(scriptStore.scripts[1].scriptId).toEqual(2);
+        expect(scriptStore.scripts[1].scriptId).toEqual(3);
 
       })
     });
