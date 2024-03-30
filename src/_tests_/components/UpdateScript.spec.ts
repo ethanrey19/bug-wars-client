@@ -30,7 +30,7 @@ describe('UpdateScript.vue', () => {
   it('saves updated scripts', async () => {
     store = useScriptStore(pinia);
     mockScript = {
-      scriptId: 1,
+      scriptId: '32900556-e043-4693-90c6-65cf220d27a3',
       name: 'Test Script',
       body: 'Hello world!',
     };
@@ -44,7 +44,7 @@ describe('UpdateScript.vue', () => {
     mockResponse = {
       status: 202,
       data: {
-        script_id: 1,
+        script_id: '32900556-e043-4693-90c6-65cf220d27a3',
         name: 'Test2Script2',
         body: 'Goodbye world!',
       },

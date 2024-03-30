@@ -28,48 +28,54 @@ import { computed, onMounted, ref, watch } from 'vue';
 const mapStore = useGameMapStore();
 const currentIndex = ref(0);
 
-onMounted(async () => {
-  mapStore.init();
+onMounted(() => {
+ mapStore.init();
+ const persistedIndex = localStorage.getItem('currentMapIndex');
+ if (persistedIndex) {
+    currentIndex.value = parseInt(persistedIndex, 10);
+ }
 });
 
 const maps = computed(() => {
-  return mapStore.maps;
+ return mapStore.maps;
 });
 
 const currentMap = computed(() => {
-  return maps.value[currentIndex.value];
+ return maps.value[currentIndex.value];
 });
 
 function nextMap() {
-  currentIndex.value = (currentIndex.value + 1) % maps.value.length;
+ currentIndex.value = (currentIndex.value + 1) % maps.value.length;
+ localStorage.setItem('currentMapIndex', currentIndex.value.toString());
 }
 
 function prevMap() {
-  currentIndex.value = (currentIndex.value - 1 + maps.value.length) % maps.value.length;
+ currentIndex.value = (currentIndex.value - 1 + maps.value.length) % maps.value.length;
+ localStorage.setItem('currentMapIndex', currentIndex.value.toString());
 }
 
 function setMapDetails() {
-  const map = maps.value[currentIndex.value];
+ const map = maps.value[currentIndex.value];
 
-  const mapImage = document.querySelector('.map-image');
-  if (typeof map.imagePath === 'string') {
+ const mapImage = document.querySelector('.map-image');
+ if (typeof map.imagePath === 'string') {
     if (mapImage instanceof HTMLImageElement) {
-      console.log('here');
       mapImage.src = map.imagePath;
     }
-  }
-  const currentMapName = document.getElementById('currentMapName');
-  if (currentMapName !== null) {
+ }
+ const currentMapName = document.getElementById('currentMapName');
+ if (currentMapName !== null) {
     currentMapName.textContent = String(map.name);
-  } else {
+ } else {
     console.error("Element with id 'currentMapName' not found!");
-  }
+ }
 }
 
 watch(currentMap, () => {
-  setMapDetails();
+ setMapDetails();
 });
 </script>
+
 
 <style lang="scss" scoped>
 @import '@/assets/styles/styles.scss';

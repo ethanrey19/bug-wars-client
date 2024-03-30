@@ -11,7 +11,17 @@ export type ScriptRequest = {
 };
 
 export type Script = {
-  scriptId: number;
+  scriptId: string;
   name: string;
   body: string;
 };
+
+export type GameRequest = {
+  mapId: string;
+  scriptIds: string[];
+};
+
+export type PlayerSelection = {
+  name: string;
+  selection: string;
+}

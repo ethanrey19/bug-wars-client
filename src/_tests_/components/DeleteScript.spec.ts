@@ -29,17 +29,17 @@ describe('DeleteScript.vue', () => {
       });
       const mockScripts = [
         {
-          scriptId: 1,
+          scriptId: '32900556-e043-4693-90c6-65cf220d27a3',
           name: 'Script One',
           body: 'Testing One Script',
         },
         {
-          scriptId: 2,
+          scriptId: '1c4ae26c-d983-4827-897a-bd99ea60d329',
           name: 'Script Two',
           body: 'Testing a Second Script',
         },
         {
-        scriptId: 3,
+        scriptId: '2980c080-6d2f-4986-8120-bf42e570117d',
         name: 'Script Three',
         body: 'Testing a Third Script',
           },
@@ -55,7 +55,7 @@ describe('DeleteScript.vue', () => {
         const toggleButton = wrapper.find('#toggle-button');
         
 
-        const mockScriptID = 2;
+        const mockScriptID = '1c4ae26c-d983-4827-897a-bd99ea60d329';
        
         const mockResponse: AxiosResponse<any, any> = {
           status: 200, 
@@ -75,7 +75,7 @@ describe('DeleteScript.vue', () => {
         expect(scriptService.deleteScriptById).toHaveBeenCalledOnce();
         expect(scriptService.deleteScriptById).toHaveBeenCalledWith(mockScriptID);
         expect(scriptStore.scripts.length).toEqual(2);
-        expect(scriptStore.scripts[1].scriptId).toEqual(3);
+        expect(scriptStore.scripts[1].scriptId).toEqual('2980c080-6d2f-4986-8120-bf42e570117d');
 
       })
     });
