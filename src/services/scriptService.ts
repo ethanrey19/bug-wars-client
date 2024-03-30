@@ -15,7 +15,7 @@ export default {
     return axios.put(`/api/scripts/${scriptId}`, script);
   },
 
-  async deleteScriptById(scriptId: number) {
+  async deleteScriptById(scriptId: string) {
     return axios.delete(`/api/scripts/${scriptId}`);
   },
 

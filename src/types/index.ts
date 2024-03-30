@@ -20,3 +20,8 @@ export type GameRequest = {
   mapId: string;
   scriptIds: string[];
 };
+
+export type PlayerSelection = {
+  name: string;
+  selection: string;
+}

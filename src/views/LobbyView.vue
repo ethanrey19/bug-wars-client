@@ -12,13 +12,12 @@
 <script setup lang="ts">
 import MapCarousel from '@/components/MapCarousel.vue';
 import PlayerScriptSelector from '@/components/PlayerScriptSelector.vue';
-import { PlayerSelection } from '@/models/player-selection.interface';
 import gameService from '@/services/gameService';
 import scriptService from '@/services/scriptService';
-import type { GameRequest } from '@/types';
-import { computed, ref } from 'vue';
+import {  ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useGameMapStore } from '@/stores/GameMapStore';
+import type { PlayerSelection } from '@/types';
 
 const gameMapStore = useGameMapStore();
 
