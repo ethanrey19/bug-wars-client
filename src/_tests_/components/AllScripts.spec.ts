@@ -86,7 +86,7 @@ describe('AllScripts', () => {
     await wrapper.vm.$nextTick(); // Wait for Vue to update the DOM
 
     //Now check if the push method has been called
-    expect(mockRouter.push).toHaveBeenCalledWith({ name: 'script-detail', params: { id: 1 } });
+    expect(mockRouter.push).toHaveBeenCalledWith({ name: 'script-detail', params: { id: '32900556-e043-4693-90c6-65cf220d27a3' } });
     expect(mockRouter.push).toHaveBeenCalled();
   });
 });
