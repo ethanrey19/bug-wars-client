@@ -1,5 +1,5 @@
  export interface GameMap{
-    id: string;
+    id: number;
     name: string;
     height: number;
     width: number;

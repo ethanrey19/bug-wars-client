@@ -61,7 +61,7 @@ describe('ScriptService', () => {
   });
 
   it('should get all scripts', async () => {
-    const scripts = [{script_id: '32900556-e043-4693-90c6-65cf220d27a3', name: "Script 1", body: "Test One"},{script_id: 2, name: "Script 2", body: "Test Two"},{script_id: 3, name: "Script 3", body: "Test Three"}]
+    const scripts = [{script_id: 1, name: "Script 1", body: "Test One"},{script_id: 2, name: "Script 2", body: "Test Two"},{script_id: 3, name: "Script 3", body: "Test Three"}]
     const response = { data: scripts, status: 200, statusText: '', headers: {}, config: {} as any };
     mockAxiosGet.mockResolvedValue(response);
    
@@ -84,7 +84,7 @@ describe('ScriptService', () => {
    
    it('should update a script', async () => {
     const script = { script_name: 'updated script', body: 'updated script body' };
-    const scriptId = '32900556-e043-4693-90c6-65cf220d27a3';
+    const scriptId = 1;
     const response = { data: script, status: 200, statusText: '', headers: {}, config: {} as any };
     mockAxiosPut.mockResolvedValue(response);
    
@@ -95,7 +95,7 @@ describe('ScriptService', () => {
    
    it('should handle errors when updating a script', async () => {
     const script = {};
-    const scriptId = '32900556-e043-4693-90c6-65cf220d27a3';
+    const scriptId = 1;
     const error = new Error('Network error');
     mockAxiosPut.mockRejectedValue(error);
    
@@ -108,7 +108,7 @@ describe('ScriptService', () => {
    });
    
    it('should delete a script by id', async () => {
-    const scriptId = '32900556-e043-4693-90c6-65cf220d27a3';
+    const scriptId = 1;
     const response = { data: {}, status: 204, statusText: '', headers: {}, config: {} as any };
     mockAxiosDelete.mockResolvedValue(response);
    
@@ -118,7 +118,7 @@ describe('ScriptService', () => {
    });
    
    it('should handle errors when deleting a script by id', async () => {
-    const scriptId = '32900556-e043-4693-90c6-65cf220d27a3';
+    const scriptId = 1;
     const error = new Error('Network error');
     mockAxiosDelete.mockRejectedValue(error);
    
