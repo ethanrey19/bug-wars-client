@@ -18,7 +18,7 @@
       <label class="input-label">{{ player.name }}</label>
     </li>
     <li class="menu-item">
-      <button @click="togglePlayerModal" class="primary-button">SAVE</button>
+      <button @click="updateSelections" class="primary-button">SAVE</button>
     </li>
   </div>
 </template>
@@ -27,6 +27,8 @@
 import { ref, computed, onMounted } from 'vue';
 import { useScriptStore } from '@/stores/ScriptStore';
 import { useAuthStore } from '@/stores/AuthStore';
+
+const emit = defineEmits(['update-selections']);
 
 const scriptStore = useScriptStore();
 const userStore = useAuthStore();
@@ -37,9 +39,15 @@ const players = ref([
   { name: 'ENEMY 2', selection: '' },
   { name: 'ENEMY 3', selection: '' },
 ]);
+
 const viewModal = ref(false);
 const togglePlayerModal = () => {
   viewModal.value = !viewModal.value;
+};
+
+const updateSelections = () => {
+  togglePlayerModal();
+  emit('update-selections', players.value);
 };
 
 const scripts = computed(() => {

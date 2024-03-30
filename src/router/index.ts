@@ -7,7 +7,6 @@ import AllScriptsViewVue from '@/views/AllScriptsView.vue';
 import { useAuthStore } from '@/stores/AuthStore';
 import ScriptDetailView from '@/views/ScriptDetailView.vue';
 import PlayView from '@/views/PlayView.vue';
-import UnderConstruction from "@/views/UnderConstruction.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -42,7 +41,7 @@ const router = createRouter({
       name: 'lobby',
       component:LobbyView,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -50,7 +49,7 @@ const router = createRouter({
       name: 'play',
       component:PlayView,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -75,12 +74,6 @@ const router = createRouter({
       path: '/scripts/:id',
       name: 'script-detail',
       component: ScriptDetailView,
-    },
- 
-    {
-      path: '/underconstruction',
-      name: 'underConstruction',
-      component: UnderConstruction,
     },
   ],
 });

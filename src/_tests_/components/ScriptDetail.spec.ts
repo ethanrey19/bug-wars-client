@@ -1,31 +1,37 @@
-import { mount } from '@vue/test-utils'
+import { mount, shallowMount } from '@vue/test-utils'
 import ScriptDetail from '@/views/ScriptDetailView.vue'
 import { useScriptStore } from '@/stores/ScriptStore'
-import { createPinia } from 'pinia'
-import { describe, it, expect, vi } from 'vitest'
+import { createPinia, setActivePinia } from 'pinia'
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+import type { Script } from '@/types'
+import { forEachChild } from 'typescript'
 
+
+let testScript: Script;
+let store;
+const pinia = createPinia();
 describe('ScriptDetail', () => {
+  beforeEach(() => {
+    testScript = {
+        scriptId: '32900556-e043-4693-90c6-65cf220d27a3',
+        name: 'Script One',
+        body: 'Testing a Script',
+      };
+
+    setActivePinia(pinia);    
+  });
+
  it('renders script details', async () => {
- const pinia = createPinia()
- const store = useScriptStore(pinia)
+ store = useScriptStore()
 
- store.setScript({
-   scriptId: 1,
-   name: 'Script One',
-   body: 'Testing a Script',
- })
+ store.setCurrentScript(testScript);
 
- const wrapper = mount(ScriptDetail, {
-  global: {
-    plugins: [pinia],
-  },
- })
+ const wrapper = shallowMount(ScriptDetail)
 
  await wrapper.vm.$nextTick() // Wait for Vue to update the DOM
- const scriptDetails = wrapper.findAll('div')
- expect(scriptDetails.length).toBe(4)
- expect(scriptDetails[1].text()).toBe('Script ID: 1')
- expect(scriptDetails[2].text()).toBe('Title: Script One')
- expect(scriptDetails[3].text()).toBe('Body: Testing a Script')
+ const scriptName = wrapper.findAll('.Large-Headline-Text');
+ const scriptBody = wrapper.findAll('.script-body-container');
+ expect(scriptName[0].text()).toBe(testScript.name);
+ expect(scriptBody[0].text()).toBe(testScript.body);
  })
 })

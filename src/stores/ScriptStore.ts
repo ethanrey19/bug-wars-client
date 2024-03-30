@@ -1,43 +1,43 @@
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia';
 import scriptService from '../services/scriptService';
-import type { Script } from "@/types";
-export const useScriptStore = defineStore("script", {
+import type { Script } from '@/types';
+
+export const useScriptStore = defineStore('script', {
   state: () => {
     return {
       scripts: [] as Script[],
-      script: JSON.parse(sessionStorage.getItem('script') || '{}') as Script,
+      currentScript: JSON.parse(sessionStorage.getItem('script') || '{}') as Script,
     };
   },
   actions: {
     init() {
-      console.log('here')
-      scriptService.getAllScripts().then(response => {
-        this.scripts = response.data;
-        console.log('made it here')
-      }).catch(error => {
-        console.error('Error fetching scripts:', error);
-      });
+      scriptService
+        .getAllScripts()
+        .then((response) => {
+          this.scripts = response.data;
+        })
+        .catch((error) => {
+          console.error('Error fetching Scripts:', error);
+        });
     },
-    setScripts(scripts: any){
-      this.scripts = scripts;
+    setScripts(scriptArray: Script[]) {
+      this.scripts = scriptArray;
     },
-    setScript(script: any) {
-      this.script = script;
-      sessionStorage.setItem('script', JSON.stringify(this.script));
+    setCurrentScript(script: Script) {
+      this.currentScript = script;
+      sessionStorage.setItem('script', JSON.stringify(this.currentScript));
     },
-    async addNewScript(script: Script){
+    async addNewScript(script: Script) {
       this.scripts.push(script);
     },
-    deleteScript(id: number){
-
-      for(let i = 0; i<this.scripts.length;i++){
-        if (this.scripts[i].scriptId === id){
-          this.scripts.splice(i,1);
+    deleteScript(id: string) {
+      for (let i = 0; i < this.scripts.length; i++) {
+        if (this.scripts[i].scriptId === id) {
+          this.scripts.splice(i, 1);
           return this.scripts;
-        } 
+        }
       }
       return this.scripts;
-     }
-     
+    },
   },
 });
