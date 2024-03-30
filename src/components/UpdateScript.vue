@@ -44,7 +44,7 @@ const toggleEditor = () => {
 };
 
 const saveEditorScript = () => {
-  const scriptId = scriptStore.currentScript.scriptId.toString();
+  const scriptId = scriptStore.currentScript.scriptId;
   scriptService
     .updateScript(script, scriptId)
     .then((response) => {

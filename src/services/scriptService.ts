@@ -19,7 +19,7 @@ export default {
     return axios.delete(`/api/scripts/${scriptId}`);
   },
 
-  async getScriptByName(scriptName: number) {
+  async getScriptByName(scriptName: string) {
     return axios.get(`/api/scripts/name/${scriptName}`);
   }
 };
