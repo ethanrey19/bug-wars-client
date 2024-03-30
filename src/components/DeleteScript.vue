@@ -33,7 +33,7 @@ const cancelDelete = () => {
 };
 
 const handleDelete = async () => {
-  const scriptId: string = script.value.scriptId;
+  const scriptId: number = script.value.scriptId;
   scriptService
     .deleteScriptById(scriptId)
     .then((response) => {

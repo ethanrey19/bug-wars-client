@@ -30,7 +30,7 @@ export const useScriptStore = defineStore('script', {
     async addNewScript(script: Script) {
       this.scripts.push(script);
     },
-    deleteScript(id: string) {
+    deleteScript(id: number) {
       for (let i = 0; i < this.scripts.length; i++) {
         if (this.scripts[i].scriptId === id) {
           this.scripts.splice(i, 1);

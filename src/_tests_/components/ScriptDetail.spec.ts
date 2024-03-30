@@ -13,7 +13,7 @@ const pinia = createPinia();
 describe('ScriptDetail', () => {
   beforeEach(() => {
     testScript = {
-        scriptId: '32900556-e043-4693-90c6-65cf220d27a3',
+        scriptId: 1,
         name: 'Script One',
         body: 'Testing a Script',
       };

@@ -25,7 +25,7 @@ const script = computed(() => {
 });
 onUnmounted(() => {
   scriptStore.setCurrentScript({
-    scriptId: '32900556-e043-4693-90c6-65cf220d27a3',
+    scriptId: 0,
     name: "",
     body: "",
 });
