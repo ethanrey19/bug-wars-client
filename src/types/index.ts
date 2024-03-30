@@ -11,7 +11,7 @@ export type ScriptRequest = {
 };
 
 export type Script = {
-  scriptId: string;
+  scriptId: number;
   name: string;
   body: string;
 };

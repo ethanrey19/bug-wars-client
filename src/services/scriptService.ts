@@ -11,15 +11,15 @@ export default {
     });
   },
 
-  async updateScript(script: any, scriptId: string) {
+  async updateScript(script: any, scriptId: number) {
     return axios.put(`/api/scripts/${scriptId}`, script);
   },
 
-  async deleteScriptById(scriptId: string) {
+  async deleteScriptById(scriptId: number) {
     return axios.delete(`/api/scripts/${scriptId}`);
   },
 
-  async getScriptByName(scriptName: string) {
+  async getScriptByName(scriptName: number) {
     return axios.get(`/api/scripts/name/${scriptName}`);
   }
 };
