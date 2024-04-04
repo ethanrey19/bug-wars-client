@@ -31,7 +31,7 @@ test('setCurrentMap should set a single gameMap in store and sessionStorage', ({
   store.setCurrentMap(mockMaps[1]);
 
   expect(store.currentMap).toEqual(mockMaps[1]);
-  expect(localStorage.getItem('gameMap')).toBe(JSON.stringify(mockMaps[1]));
+  expect(sessionStorage.getItem('gameMap')).toBe(JSON.stringify(mockMaps[1]));
 });
 
 
