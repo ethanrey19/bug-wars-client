@@ -5,8 +5,8 @@ import type { GameMap } from '@/models/game-map.interface';
 export const useGameMapStore = defineStore('gameMap', {
  state: () => {
     return {
-      maps: JSON.parse(localStorage.getItem('gameMaps') || '[]') as GameMap[],
-      currentMap: JSON.parse(localStorage.getItem('gameMap') || '{}') as GameMap,
+      maps: JSON.parse(sessionStorage.getItem('gameMaps') || '[]') as GameMap[],
+      currentMap: JSON.parse(sessionStorage.getItem('gameMap') || '{}') as GameMap,
     };
  },
  actions: {
@@ -15,7 +15,7 @@ export const useGameMapStore = defineStore('gameMap', {
         .getAllMaps()
         .then((response) => {
           this.maps = response.data;
-          localStorage.setItem('gameMaps', JSON.stringify(this.maps));
+          sessionStorage.setItem('gameMaps', JSON.stringify(this.maps));
         })
         .catch((error) => {
           console.error('Error fetching Game maps:', error);
@@ -24,15 +24,15 @@ export const useGameMapStore = defineStore('gameMap', {
 
     setMaps(mapArray: GameMap[]) {
       this.maps = mapArray;
-      localStorage.setItem('gameMaps', JSON.stringify(this.maps));
+      sessionStorage.setItem('gameMaps', JSON.stringify(this.maps));
     },
     setCurrentMap(map: GameMap) {
       this.currentMap = map;
       try {
-        localStorage.setItem('gameMap', JSON.stringify(this.currentMap));
+        sessionStorage.setItem('gameMap', JSON.stringify(this.currentMap));
         console.log(this.currentMap);
       } catch (error) {
-        console.error('Error setting currentMap in localStorage:', error);
+        console.error('Error setting currentMap in sessionStorage:', error);
       }
     },
 
