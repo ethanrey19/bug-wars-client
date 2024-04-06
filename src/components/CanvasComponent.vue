@@ -151,7 +151,7 @@ onMounted(() => {
     }
   }
   
-  async function drawBugs(redX, redY, blueX, blueY) {
+  async function drawBugs(redX: number, redY: number, blueX: number, blueY: number) {
     const contextBug = bugElement?.getContext('2d');
     contextBug?.clearRect(0, 0, width, height)
     contextBug?.drawImage(RedBugImage, redX, redY, tileSize, tileSize);
