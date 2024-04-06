@@ -1,11 +1,20 @@
 <template>
-  <div>
+  <div id="canvasDiv">
     <canvas
       ref="canvasRef"
       :width="width"
       :height="height"
       tabindex="0"
       style="border: 3px solid white"
+      id = "mapCanvas"
+    ></canvas>
+    <canvas
+      ref="canvasRefBug"
+      :width="width"
+      :height="height"
+      tabindex="0"
+      style="border: 3px solid white"
+      id = "entityCanvas"
     ></canvas>
   </div>
 </template>
@@ -18,11 +27,13 @@ import { onMounted, ref } from 'vue';
 //   const currentMapIndex = localStorage.getItem('currentMapIndex');
 
 const canvasRef = ref<HTMLCanvasElement | null>(null);
+const canvasRefBug = ref<HTMLCanvasElement | null>(null);
 const tileSize = 16;
 const mapWidth = 11;
 const mapHeight = 11;
 const width: number = tileSize * mapWidth;
 const height: number = tileSize * mapHeight;
+
 
 let body =
   '' +
@@ -40,13 +51,13 @@ let body =
 
 onMounted(() => {
   let element = canvasRef.value;
+  let bugElement = canvasRefBug.value;
   const wallImage = new Image();
   const floorImage = new Image();
   const RedBugImage = new Image();
   const BlueBugImage = new Image();
   const GreenBugImage = new Image();
   const YellowBugImage = new Image();
-
   // load images
   const imagePromises = [
     new Promise((resolve, reject) => {
@@ -84,6 +95,38 @@ onMounted(() => {
   Promise.all(imagePromises)
     .then(() => {
       drawMap();
+    }).then(() => { 
+      setTimeout(() => {
+        drawBugs(80, 16, 80, 144);
+      }, 500)      
+    }).then(() => {
+      setTimeout(() => {
+        drawBugs(80, 32, 96, 144);
+      }, 1000)      
+    }).then(() => {
+      setTimeout(() => {
+        drawBugs(64, 32, 96, 128);
+      }, 1500) 
+    }).then(() => {
+      setTimeout(() => {
+        drawBugs(64, 32, 112, 128);
+      }, 2000) 
+    }).then(() => {
+      setTimeout(() => {
+        drawBugs(80, 32, 112, 112);
+      }, 2500) 
+    }).then(() => {
+      setTimeout(() => {
+        drawBugs(64, 32, 112, 112);
+      }, 3000) 
+    }).then(() => {
+      setTimeout(() => {
+        drawBugs(48, 32, 128, 112);
+      }, 3500)     
+    }).then(() => {
+      setTimeout(() => {
+        drawBugs(48, 16, 144, 112);
+      }, 4000) 
     })
     .catch((error) => {
       console.error('Error loading images:', error);
@@ -107,9 +150,17 @@ onMounted(() => {
       }
     }
   }
-
+  
+  async function drawBugs(redX, redY, blueX, blueY) {
+    const contextBug = bugElement?.getContext('2d');
+    contextBug?.clearRect(0, 0, width, height)
+    contextBug?.drawImage(RedBugImage, redX, redY, tileSize, tileSize);
+    contextBug?.drawImage(BlueBugImage, blueX, blueY, tileSize, tileSize);
+}
 
 });
+
+
 </script>
 
 <style lang="scss" scoped>
@@ -118,4 +169,21 @@ onMounted(() => {
 #map-name {
   margin-bottom: 5%;
 }
+
+#canvasDiv {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+#mapCanvas {
+  position: absolute;
+  z-index: 1;
+}
+
+#entityCanvas {
+  position: absolute;
+  z-index: 2;
+}
+
 </style>
