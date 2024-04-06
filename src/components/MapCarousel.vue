@@ -30,7 +30,7 @@ const currentIndex = ref(0);
 
 onMounted(() => {
  mapStore.init();
- const persistedIndex = localStorage.getItem('currentMapIndex');
+ const persistedIndex = sessionStorage.getItem('currentMapIndex');
  if (persistedIndex) {
     currentIndex.value = parseInt(persistedIndex, 10);
  }
@@ -46,12 +46,12 @@ const currentMap = computed(() => {
 
 function nextMap() {
  currentIndex.value = (currentIndex.value + 1) % maps.value.length;
- localStorage.setItem('currentMapIndex', currentIndex.value.toString());
+ sessionStorage.setItem('currentMapIndex', currentIndex.value.toString());
 }
 
 function prevMap() {
  currentIndex.value = (currentIndex.value - 1 + maps.value.length) % maps.value.length;
- localStorage.setItem('currentMapIndex', currentIndex.value.toString());
+ sessionStorage.setItem('currentMapIndex', currentIndex.value.toString());
 }
 
 function setMapDetails() {

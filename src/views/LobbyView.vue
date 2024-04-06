@@ -42,7 +42,7 @@ const play = async () => {
 };
 
 async function sendGameRequest(scriptIds: string[]) {
-  const currentMapIndex = localStorage.getItem('currentMapIndex');
+  const currentMapIndex = sessionStorage.getItem('currentMapIndex');
   if (currentMapIndex) {
     const currentMap = gameMapStore.maps[parseInt(currentMapIndex, 10)];
     if (currentMap) {
