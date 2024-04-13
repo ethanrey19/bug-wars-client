@@ -33,7 +33,9 @@ const mapWidth = 11;
 const mapHeight = 11;
 const width: number = tileSize * mapWidth;
 const height: number = tileSize * mapHeight;
-
+const bugPlayers = [];
+let bugPositions = [5, 1, 5, 9, 1, 5, 9, 5];
+let bugDirections = ["SOUTH", "NORTH", "EAST", "WEST"]
 
 let body =
   '' +
@@ -52,6 +54,8 @@ let body =
 onMounted(() => {
   let element = canvasRef.value;
   let bugElement = canvasRefBug.value;
+  const context = element?.getContext('2d');
+  const contextBug = bugElement?.getContext('2d');
   const wallImage = new Image();
   const floorImage = new Image();
   const RedBugImage = new Image();
@@ -74,21 +78,25 @@ onMounted(() => {
       RedBugImage.onload = () => resolve(RedBugImage);
       RedBugImage.onerror = reject;
       RedBugImage.src = 'src/assets/imgs/RedBug.png';
+      bugPlayers.push(RedBugImage);
     }),
     new Promise((resolve, reject) => {
       BlueBugImage.onload = () => resolve(BlueBugImage);
       BlueBugImage.onerror = reject;
       BlueBugImage.src = 'src/assets/imgs/BlueBug.png';
+      bugPlayers.push(BlueBugImage);
     }),
     new Promise((resolve, reject) => {
       GreenBugImage.onload = () => resolve(GreenBugImage);
       GreenBugImage.onerror = reject;
       GreenBugImage.src = 'src/assets/imgs/GreenBug.png';
+      bugPlayers.push(GreenBugImage);
     }),
     new Promise((resolve, reject) => {
       YellowBugImage.onload = () => resolve(YellowBugImage);
       YellowBugImage.onerror = reject;
       YellowBugImage.src = 'src/assets/imgs/YellowBug.png';
+      bugPlayers.push(YellowBugImage);
     }),
   ];
 
@@ -97,43 +105,56 @@ onMounted(() => {
       drawMap();
     }).then(() => { 
       setTimeout(() => {
-        drawBugs(80, 16, 80, 144);
+        drawAllBugs(bugPlayers, bugPositions, bugDirections);
       }, 500)      
     }).then(() => {
       setTimeout(() => {
-        drawBugs(80, 32, 96, 144);
+        bugPositions = [6, 1, 6, 9, 1, 4, 8, 5];
+        bugDirections = ["SOUTH", "NORTH", "EAST", "WEST"];
+        drawAllBugs(bugPlayers, bugPositions, bugDirections);
       }, 1000)      
     }).then(() => {
       setTimeout(() => {
-        drawBugs(64, 32, 96, 128);
+        bugPositions = [6, 1, 6, 8, 2, 4, 7, 5];
+        bugDirections = ["WEST", "NORTH", "EAST", "WEST"];
+        drawAllBugs(bugPlayers, bugPositions, bugDirections);
       }, 1500) 
     }).then(() => {
       setTimeout(() => {
-        drawBugs(64, 32, 112, 128);
+        bugPositions = [6, 2, 6, 9, 1, 4, 7, 5];
+        bugDirections = ["WEST", "EAST", "EAST", "NORTH"];
+        drawAllBugs(bugPlayers, bugPositions, bugDirections);
       }, 2000) 
     }).then(() => {
       setTimeout(() => {
-        drawBugs(80, 32, 112, 112);
+        bugPositions = [6, 3, 6, 9, 2, 4, 6, 5];
+        bugDirections = ["WEST", "EAST", "EAST", "NORTH"];
+        drawAllBugs(bugPlayers, bugPositions, bugDirections);
       }, 2500) 
     }).then(() => {
       setTimeout(() => {
-        drawBugs(64, 32, 112, 112);
+        bugPositions = [6, 3, 5, 9, 2, 4, 6, 5];
+        bugDirections = ["NORTH", "EAST", "SOUTH", "WEST"];
+        drawAllBugs(bugPlayers, bugPositions, bugDirections);
       }, 3000) 
     }).then(() => {
       setTimeout(() => {
-        drawBugs(48, 32, 128, 112);
+        bugPositions = [5, 3, 4, 9, 3, 4, 5, 5];
+        bugDirections = ["NORTH", "EAST", "SOUTH", "WEST"];
+        drawAllBugs(bugPlayers, bugPositions, bugDirections);
       }, 3500)     
     }).then(() => {
       setTimeout(() => {
-        drawBugs(48, 16, 144, 112);
+        bugPositions = [4, 3, 4, 8, 3, 5, 6, 5];
+        bugDirections = ["NORTH", "EAST", "SOUTH", "WEST"];
+        drawAllBugs(bugPlayers, bugPositions, bugDirections);
       }, 4000) 
     })
     .catch((error) => {
-      console.error('Error loading images:', error);
+    console.error('Error loading images:', error);
     });
 
   async function drawMap() {
-    const context = element?.getContext('2d');
     let x = 0;
     let y = 0;
     for (let i = 0; i < body.length; i++) {
@@ -151,14 +172,40 @@ onMounted(() => {
     }
   }
   
-  async function drawBugs(redX: number, redY: number, blueX: number, blueY: number) {
-    const contextBug = bugElement?.getContext('2d');
-    contextBug?.clearRect(0, 0, width, height)
-    contextBug?.drawImage(RedBugImage, redX, redY, tileSize, tileSize);
-    contextBug?.drawImage(BlueBugImage, blueX, blueY, tileSize, tileSize);
+  async function drawBug(contextBug, image, x, y, bugDirection) {
+    x *= 16;
+    y *= 16;
+    contextBug.save();
+    if (bugDirection == "EAST") {
+      contextBug.translate(x, y);
+      contextBug.rotate((90 * Math.PI) / 180);
+      contextBug.drawImage(image, 0, -16, tileSize, tileSize);
+    } else if (bugDirection == "SOUTH") {
+      contextBug.translate(x, y);
+      contextBug.rotate((180 * Math.PI) / 180);
+      contextBug.drawImage(image, -16, -16, tileSize, tileSize);
+    } else if (bugDirection == "WEST") {
+      contextBug.translate(x, y);
+      contextBug.rotate((270 * Math.PI) / 180);
+      contextBug.drawImage(image, -16, 0, tileSize, tileSize);
+    } else if (bugDirection == "NORTH") {
+      contextBug.drawImage(image, x, y, tileSize, tileSize);
+    }
+    contextBug.restore();
+  }
+
+  async function drawAllBugs(bugPlayers, bugPositions, bugDirections) {
+    contextBug.clearRect(0, 0, width, height);
+    let j = 0;
+    for (let i = 0; i < bugPlayers.length; i++) {
+      drawBug(contextBug, bugPlayers[i], bugPositions[j], bugPositions[j+1], bugDirections[i])
+      j += 2;
+    }
+
 }
 
 });
+
 
 
 </script>
