@@ -26,22 +26,4 @@
   // overflow: hidden; // Ensure no overflow content is visible
 }
 
-.play-button {
-  height: 64px;
-  width: 40%;
-  color: $Primary;
-  border: 1px solid $Primary;
-  background-color: $Black;
-  font-family: 'Press Start 2P';
-  font-size: 24px;
-  margin-top: 55%;
-}
-.play-button:hover {
-  background-color: $Primary;
-  color: $Black;
-}
-.play-button:active {
-  color: $Primary;
-  background-color: $Black;
-}
 </style>

@@ -171,7 +171,7 @@ onMounted(() => {
       }
     }
   }
-  
+
   async function drawBug(contextBug, image, x, y, bugDirection) {
     x *= 16;
     y *= 16;
